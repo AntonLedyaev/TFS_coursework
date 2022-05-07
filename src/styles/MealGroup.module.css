@@ -1,0 +1,27 @@
+.MealGroup {
+    margin-bottom: 60px;
+
+}
+
+.MealGroupHeader {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    font-weight: bold;
+    background: #d0ecff;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.MealGroupHeaderMacro {
+    margin-right: 40px;
+}
+
+.MealGroupHeaderMacros {
+    width: 300px;
+}
+
+.MealGroupHeaderTitle {
+    display: block;
+    width: 100px;
+}

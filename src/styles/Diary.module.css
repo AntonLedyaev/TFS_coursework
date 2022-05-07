@@ -1,0 +1,4 @@
+.DiaryHeader {
+    display: flex;
+    justify-content: space-between;
+}
