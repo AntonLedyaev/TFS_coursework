@@ -1,35 +1,33 @@
 import React, { useRef, useState } from "react"
 import { useAuth } from "../contexts/AuthContext"
-// import { Link, useNavigate } from "react-router-dom"
 import { Link, useNavigate } from "react-router-dom"
-
-export default function Signup() {
+import '../styles/Login.css'
+import Button from "../decorators/Button";
+export default function Login() {
   const emailRef = useRef()
   const passwordRef = useRef()
-  const passwordConfirmRef = useRef()
-  const { signup } = useAuth()
+  const { login } = useAuth()
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
-  const history = useNavigate()
+  let navigate = useNavigate()
 
   async function handleSubmit(e) {
-    e.preventDefault()
 
-    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Passwords do not match")
-    }
+    e.preventDefault()
     try {
       setError("")
       setLoading(true)
-      await signup(emailRef.current.value, passwordRef.current.value)
-      // history.push("/")
-      history('/')
+      await login(emailRef.current.value, passwordRef.current.value)
+      setLoading(false)
+      navigate('/diary');
+      // await new Promise(resolve => setTimeout(resolve, 3000))
+
     } catch (e) {
       // console.log(e)
-      setError("Failed to create an account")
+      setError("Failed to log in")
+      setLoading(false)
+    } finally {
     }
-
-    setLoading(false)
   }
 
   return (
@@ -40,31 +38,29 @@ export default function Signup() {
       </div>
       <div className={'login-container'}>
         <div className={'login-container__form-container'}>
+          <h2>Войти</h2>
           {error && <alert>{error}</alert>}
-          <h2>Зарегистрироваться</h2>
           <form className={'login-container__form'} onSubmit={handleSubmit}>
             <div id="email">
-              <h2>Электронная почта</h2>
-              <input type="email" ref={emailRef} required />
+              <h3>Электронная почта</h3>
+              <input type="email" ref={emailRef} required placeholder={"E-mail"}/>
             </div>
             <div id="password">
-              <h2>Пароль</h2>
-              <input type="password" ref={passwordRef} required />
+              <h3>Пароль</h3>
+              <input type="password" ref={passwordRef} required placeholder={"Пароль"}/>
             </div>
-            <div id="password-confirm">
-              <h2>Подтвердите пароль</h2>
-              <input type="password" ref={passwordConfirmRef} required />
-            </div>
-            <button disabled={loading} type="submit">
-              Зарегистрироваться
-            </button>
+            <Button disabled={loading} type="submit">
+              Войти
+            </Button>
           </form>
           <div className={"login-container__form__links"}>
-            Уже есть аккаунт? <Link className = {"link"} to="/login">Войти</Link>
+            <Link className = {"link"} to="/forgot-password">Забыли пароль?</Link>
+          </div>
+          <div className={"login-container__form__links"}>
+            Нет аккаунта? <Link className = {"link"} to="/signup">Зарегистрироваться</Link>
           </div>
         </div>
       </div>
-
     </div>
   )
 }

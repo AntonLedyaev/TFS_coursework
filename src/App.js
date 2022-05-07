@@ -1,15 +1,16 @@
 import React from "react"
 import { AuthProvider } from "./contexts/AuthContext"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
-// import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
-import Dashboard from "./components/Dashboard"
-import Signup from "./components/SignUp"
-import Login from "./components/Login"
+import Dashboard from "./pages/Dashboard"
+import Signup from "./pages/SignUp"
+import Login from "./pages/Login"
 import PrivateRoute from "./components/PrivateRoutes"
-import UpdateProfile from "./components/UpdateProfile"
-import ForgotPassword from "./components/ForgetPassword"
+import UpdateProfile from "./pages/UpdateProfile"
+import ForgotPassword from "./pages/ForgetPassword"
 import './styles/App.css'
-// https://dev.to/iamandrewluca/private-route-in-react-router-v6-lg5
+import Diary from "./pages/Diary";
+import WeightHistory from "./pages/WeightHistory";
+import Recipes from "./pages/Recipes";
 
 function AppLogin() {
   return (
@@ -18,7 +19,16 @@ function AppLogin() {
         <Router>
           <AuthProvider>
             <Routes>
-              <Route exact path="/"
+              <Route exact path="/diary"
+                     element={<PrivateRoute><Diary/></PrivateRoute>}
+              />
+              <Route exact path="/weight-history"
+                     element={<PrivateRoute><WeightHistory/></PrivateRoute>}
+              />
+              <Route exact path="/recipes"
+                     element={<PrivateRoute><Recipes/></PrivateRoute>}
+              />
+              <Route exact path="/dashboard"
                      element={<PrivateRoute><Dashboard/></PrivateRoute>}
               />
               <Route path="/update-profile"

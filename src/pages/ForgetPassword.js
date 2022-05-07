@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react"
 import { useAuth } from "../contexts/AuthContext"
 import { Link } from "react-router-dom"
+import Button from "../decorators/Button";
 
 export default function ForgetPassword() {
   const emailRef = useRef()
@@ -40,9 +41,9 @@ export default function ForgetPassword() {
             <div id="email">
               <input type="email" ref={emailRef} required placeholder={"Электронная почта"} />
             </div>
-            <button disabled={loading} type="submit">
+            <Button disabled={loading} type="submit">
               Сбросить пароль
-            </button>
+            </Button>
           </form>
           <div className={"login-container__form__links"}>
             Уже есть аккаунт? <Link className = {"link"} to="/login">Войти</Link>

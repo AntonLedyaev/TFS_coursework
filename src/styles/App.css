@@ -6,3 +6,12 @@ body {
     color: #000e13;
 }
 
+.container {
+    margin: 30px auto;
+    width: 900px;
+}
+
+.link {
+    text-decoration: none;
+    color: #00b4ee;
+}

@@ -1,0 +1,31 @@
+
+.Table {
+    margin: 0 auto;
+    width: 100%;
+
+}
+
+.TableRow {
+    background: #f3f8fc;
+    border-collapse:separate;
+    border-spacing: 0 1em;
+}
+
+.TableItem {
+    padding: 10px;
+}
+
+.TableHeader {
+    background: #b3e9ff;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.TableHeaderItem {
+    padding: 10px;
+}
+
+.TableItemButton {
+    padding: 10px;
+    background: #fff;
+}

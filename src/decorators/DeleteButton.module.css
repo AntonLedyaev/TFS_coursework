@@ -1,0 +1,10 @@
+.Button {
+    all:unset;
+    cursor: pointer;
+}
+
+.Img {
+    display: block;
+    width: 15px;
+    height: 15px;
+}

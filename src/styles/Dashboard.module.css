@@ -1,0 +1,35 @@
+
+.dashboardInfo {
+
+}
+
+.dashboardInfoContainer {
+    padding: 20px;
+    margin-bottom: 30px;
+    box-sizing: border-box;
+}
+
+
+.dashboardInfoGoalsInput {
+    display: block;
+    border-radius: 3px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    height: 36px;
+    width: 80%;
+    padding: 0 10px;
+    margin-bottom: 20px;
+}
+
+.dashboardInfoGoalsInput:focus {
+    border-color: #00b4ee;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.dashboardInfoGoalsForm {
+    display: flex;
+    justify-content: space-between;
+}
+
+.dashboardInfoText {
+    margin-bottom: 20px;
+}

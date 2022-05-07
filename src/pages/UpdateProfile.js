@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useNavigate } from "react-router-dom"
+import Button from "../decorators/Button";
 
 export default function UpdateProfile() {
   const emailRef = useRef()
@@ -83,9 +84,9 @@ export default function UpdateProfile() {
                 placeholder="Оставьте поле пустым, чтобы не изменять"
               />
             </div>
-            <button disabled={loading} type="submit">
+            <Button disabled={loading} type="submit">
               Обновить
-            </button>
+            </Button>
           </form>
           <div className={"login-container__form__links"}>
             <Link className = {"link"} to="/">Отменить</Link>
