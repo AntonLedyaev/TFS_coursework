@@ -1,0 +1,15 @@
+.Inputnput {
+    display: block;
+    border-radius: 3px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    height: 40px;
+    width: 200px;
+    padding: 0 10px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.Input:focus {
+    border-color: #00b4ee;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.05);
+}

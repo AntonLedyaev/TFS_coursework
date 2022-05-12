@@ -16,7 +16,7 @@ const Header = () => {
           <Link to={"/weight-history"}>
             История веса
           </Link>
-          <Link to={"/dashboard"}>
+          <Link to={"/"}>
             Профиль
           </Link>
         </div>
