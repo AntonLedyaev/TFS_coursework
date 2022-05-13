@@ -1,23 +1,35 @@
 import React, {useEffect, useState} from 'react';
 import Input from "../decorators/Input";
+import {useDispatch, useSelector} from "react-redux";
+import {Link} from "@mui/material";
+import {useNavigate, useParams} from "react-router-dom";
 
 const FoodItem = (props) => {
+  let navigate = useNavigate();
+  const dispatch = useDispatch()
+  const foodListState = useSelector(state => state.foodInfo);
   const [measure, setMeasure] = useState({});
   const [amount, setAmount] = useState(1);
   const [measures, setMeasures] = useState(props.foodMeasures)
   const [nutr, setNutr] = useState({
+    Description: props.description,
     Energy: null,
     Proteins: null,
     Carbs: null,
-    Fats: null
+    Fats: null,
+    DateID: props.date,
+    Type: props.type
   });
 
 
   let referenceNutr = {
+    Description: props.description,
     Energy: null,
     Proteins: null,
     Carbs: null,
-    Fats: null
+    Fats: null,
+    DateID: props.date,
+    Type: props.type
   };
 
   props.nutrients.forEach(nutrient => {
@@ -40,10 +52,13 @@ const FoodItem = (props) => {
 
   useEffect(()=> {
     let localNutr = {
+      Description: props.description,
       Energy: null,
       Proteins: null,
       Carbs: null,
-      Fats: null
+      Fats: null,
+      DateID: props.date,
+      Type: props.type
     }
     props.nutrients.forEach(nutrient => {
       switch (nutrient.nutrientNumber) {
@@ -75,11 +90,19 @@ const FoodItem = (props) => {
     const mes = measures.find(mes => mes.disseminationText === measure)
 
     setNutr({
+      ...nutr,
       Energy: referenceNutr.Energy * localAmount * mes.gramWeight / 100,
       Proteins: referenceNutr.Proteins * localAmount * mes.gramWeight / 100,
       Carbs: referenceNutr.Carbs * localAmount * mes.gramWeight / 100,
       Fats: referenceNutr.Fats * localAmount * mes.gramWeight / 100
     })
+  }
+
+
+  const handleAddButtonClick = (event) => {
+    event.preventDefault();
+    dispatch({type: "ADD_FOOD", payload: nutr})
+    navigate(`/diary/${props.date}`);
   }
   return (
     <div>
@@ -104,7 +127,8 @@ const FoodItem = (props) => {
             {measure.disseminationText}</option>
         )}
       </select>
-      <button> добавить</button>
+      <button onClick={handleAddButtonClick}>добавить</button>
+
     </div>
   );
 };

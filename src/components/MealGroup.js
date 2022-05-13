@@ -2,7 +2,12 @@ import React from 'react';
 import AddFood from "./AddFood";
 import MealItem from "./MealItem";
 import styles from "../styles/MealGroup.module.css"
+import {useSelector} from "react-redux";
 const MealGroup = (props) => {
+  const foodList = useSelector(state => state.foodInfo);
+  const todayItems = foodList.foodInfo.filter(item => {
+    const diaryDate = props.date;
+    return (item.DateID === diaryDate && item.Type===props.type)})
   return (
     <div>
       <div className={styles.MealGroup}>
@@ -15,8 +20,15 @@ const MealGroup = (props) => {
           </span>
           <span>Калории</span>
         </div>
-        <MealItem/>
-        <AddFood/>
+        {todayItems.map(item =>
+          <MealItem
+            description ={item.Description}
+            energy = {item.Energy}
+            proteins = {item.Proteins}
+            fats = {item.Fats}
+            carbs = {item.Carbs}
+        />)}
+        <AddFood type = {props.type} date = {props.date}/>
       </div>
     </div>
   );

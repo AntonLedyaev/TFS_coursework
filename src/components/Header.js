@@ -7,7 +7,7 @@ const Header = () => {
       <div className={styles.container}>
         <h1 className={styles.logo}><span>My</span>FoodTracker</h1>
         <div className = {styles.navigation}>
-          <Link to={"/diary"}>
+          <Link to={`/diary/${new Date(Date.now()).toLocaleDateString("ru-RU")}`}>
             Дневник
           </Link>
           <Link to={"/recipes"}>

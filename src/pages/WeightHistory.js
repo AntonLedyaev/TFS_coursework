@@ -5,24 +5,40 @@ import Button from "../decorators/Button";
 import Graphic from "../components/Graphic";
 import HistoryTable from "../components/HistoryTable";
 import Input from "../decorators/Input";
+import {useDispatch, useSelector} from "react-redux";
 
 const WeightHistory = (props) => {
+  const dispatch = useDispatch();
+  const weightState = useSelector(state => state.weight)
   const [wantedWeight, setWantedWeight] = useState(0);
   const [currentWeight, setCurrentWeight] = useState({id: Date.now(),value: 0})
 
+
   const handleCurrentWeightChange = (event) => {
     event.preventDefault();
-
     const newWeight = {
       ...currentWeight, id: Date.now()
     }
-    props.addWeightValue(newWeight);
+    //props.addWeightValue(newWeight);
+    dispatch({type: "ADD_WEIGHT", payload: newWeight})
     event.preventDefault();
   }
 
   const handleWantedWeightChange = (event) => {
     event.preventDefault();
-    props.changeWantedWeight(wantedWeight);
+    dispatch({type: "CHANGE_WANTED_WEIGHT", payload: wantedWeight})
+    //props.changeWantedWeight(wantedWeight);
+  }
+
+  const handleInitialWeightChange = (event) => {
+    event.preventDefault();
+    dispatch({type: "CHANGE_INITIAL_WEIGHT", payload: wantedWeight})
+    //props.changeWantedWeight(wantedWeight);
+  }
+
+  const handleWeightRemove = (index) => {
+    dispatch({type: "DELETE_WEIGHT", payload: index})
+    console.log(index);
   }
 
   return (
@@ -44,15 +60,16 @@ const WeightHistory = (props) => {
         </div>
         <div className={styles.WeightHistoryContainer}>
           <h2>График изменения</h2>
-          <Graphic weightHistory = {props.weightHistory}/>
+          <Graphic weightHistory = {weightState.weight.weightHistory}/>
         </div>
         <div className={styles.WeightHistoryContainer}>
           <h2>История изменения веса</h2>
           <HistoryTable
-            wantedWeight ={props.wantedWeight}
+            wantedWeight ={weightState.weight.wantedWeight}
             currentWeight = {currentWeight.value}
-            weightHistory = {props.weightHistory}
-            removeWeight = {props.removeWeight}
+            weightHistory = {weightState.weight.weightHistory}
+            removeWeight = {handleWeightRemove}
+            initialWeight = {weightState.weight.initialWeight}
           />
         </div>
 
@@ -64,6 +81,17 @@ const WeightHistory = (props) => {
             type="text"
             placeholder={"Введите желаемый вес"}/>
           <Button onClick = {handleWantedWeightChange}>
+            Сохранить
+          </Button>
+        </div>
+        <div className={styles.WeightHistoryContainer}>
+          <h2>Изменить начальный вес </h2>
+          <Input
+            className={styles.WeightHistoryInput}
+            onChange ={e=>setWantedWeight(e.target.value)}
+            type="text"
+            placeholder={"Введите начальный вес"}/>
+          <Button onClick = {handleInitialWeightChange}>
             Сохранить
           </Button>
         </div>

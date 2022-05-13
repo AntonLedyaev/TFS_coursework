@@ -19,7 +19,6 @@ import AddFoodView from "./pages/AddFoodView";
 
 
 function AppLogin() {
-  console.log(useAuth());
   const [wantedWeight, setWantedWeight] = useState(70);
   const [goals, setGoals] = useState(
     {
@@ -63,11 +62,11 @@ function AppLogin() {
         <Router>
           <AuthProvider weightHistory={weightHistory} wantedWeight ={wantedWeight} goals = {goals}>
             <Routes>
-              <Route exact path="/diary"
+              <Route exact path="/diary/:date"
                      element={<PrivateRoute><Diary/></PrivateRoute>}
               />
 
-              <Route exact path="/add-food"
+              <Route exact path="/add-food/:type/:date"
                      element={<PrivateRoute><AddFoodView/></PrivateRoute>}
               />
 

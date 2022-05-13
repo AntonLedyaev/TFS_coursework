@@ -4,13 +4,15 @@ import {useEffect, useState} from "react";
 import Input from "../decorators/Input";
 import Button from "../decorators/Button";
 import FoodItem from "../components/FoodItem";
+import {useParams} from "react-router-dom";
 const AddFoodView = (props) => {
 
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
   const [search, setSearch] = useState('')
-
+  const type = useParams().type;
+  const date = useParams().date;
   let apiKey = 't7sbpbkc71VdmMtGtpgdARcHA95W3ARpeGgWnXOn'
 
   const handleSearch = () => {
@@ -35,6 +37,8 @@ const AddFoodView = (props) => {
                   description = {item.description}
                   nutrients = {item.foodNutrients}
                   foodMeasures = {item.foodMeasures}
+                  type = {type}
+                  date = {date}
         />
       ))
     );

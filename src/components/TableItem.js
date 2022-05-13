@@ -8,7 +8,9 @@ const TableItem = (props) => {
       <td className={styles.TableItem}>{new Date(props.id).toLocaleDateString('ru-RU')}</td>
       <td className={styles.TableItem}>{props.value}кг</td>
       <td className={styles.TableItem}>Тут должен быть прогрессбар</td>
-      <td className={styles.TableItemButton}><DeleteButton onClick = {()=> props.removeWeight(props.id)}/></td>
+      <td className={styles.TableItemButton}><DeleteButton onClick = {()=> {
+        props.removeWeight(props.id);
+      }}/></td>
     </tr>
   );
 };

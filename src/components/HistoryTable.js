@@ -9,7 +9,7 @@ const HistoryTable = (props) => {
           <tr className={styles.TableHeader}>
             <td className={styles.TableHeaderItem}>Дата</td>
             <td className={styles.TableHeaderItem}>Вес</td>
-            <td className={styles.TableHeaderItem}>Начальный вес: 100кг Желаемый вес: {props.wantedWeight} кг</td>
+            <td className={styles.TableHeaderItem}>Начальный вес: {props.initialWeight}кг Желаемый вес: {props.wantedWeight} кг</td>
           </tr>
           {props.weightHistory.map(weight=>
             <TableItem id = {weight.id} value ={weight.value} key = {weight.id + weight.value} removeWeight = {props.removeWeight}/>
