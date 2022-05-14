@@ -5,6 +5,9 @@ import Input from "../decorators/Input";
 import Button from "../decorators/Button";
 import FoodItem from "../components/FoodItem";
 import {useParams} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {getDatabase, ref, update} from "firebase/database";
+import {userName} from "../utils/userName";
 const AddFoodView = (props) => {
 
   const [error, setError] = useState(null);
@@ -14,6 +17,8 @@ const AddFoodView = (props) => {
   const type = useParams().type;
   const date = useParams().date;
   let apiKey = 't7sbpbkc71VdmMtGtpgdARcHA95W3ARpeGgWnXOn'
+
+
 
   const handleSearch = () => {
       fetch(`https://api.nal.usda.gov/fdc/v1/foods/search?query=${search}&pageSize=35&api_key=${apiKey}`, )

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useNavigate } from "react-router-dom"
 import Header from "../components/Header";
@@ -7,8 +7,10 @@ import styles from "../styles/Dashboard.module.css"
 import cn from 'classnames';
 import Graphic from "../components/Graphic";
 import Input from "../decorators/Input";
-import weightHistory from "./WeightHistory";
 import {useDispatch, useSelector} from "react-redux";
+import {child, get, getDatabase, ref, update} from "firebase/database";
+import {userName} from "../utils/userName";
+
 
 export default function Dashboard(props) {
   const dispatch = useDispatch();
@@ -24,11 +26,63 @@ export default function Dashboard(props) {
   const [error, setError] = useState("");
   const { currentUser, logout } = useAuth();
   const history = useNavigate();
+  const state = useSelector(state => state)
+  const db = getDatabase();
+  useEffect(() => {
+    function getData() {
+      get(child(ref(db), `/users/${userName(state)}/goals`)).then((snapshot) => {
+        if (snapshot.exists()) {
+          const data = snapshot.val()
+
+
+          console.log(data)
+          /*
+          if(!data) {
+            data.goals = {}
+          }*/
+          dispatch({type: "GET_GOALS", payload: data})
+        }
+      })
+
+      get(child(ref(db), `/users/${userName(state)}/weight`)).then((snapshot) => {
+        if (snapshot.exists()) {
+          const data = snapshot.val()
+          if(!data.weightHistory) {
+            data.weightHistory = []
+          }
+          dispatch({type: "GET_WEIGHT", payload: data})
+        }
+      })
+
+      get(child(ref(db), `/users/${userName(state)}/foodInfo`)).then((snapshot) => {
+        if (snapshot.exists()) {
+          const data = snapshot.val()
+          /*
+          if(!data.foodInfo) {
+            data.foodInfo = []
+          }*/
+          dispatch({type: "GET_FOOD", payload: data})
+        }
+      })
+    }
+
+    if (state.user.user !== '') {
+      getData()
+    }
+
+  },[dispatch,state.user])
+
+  useEffect(() => {
+    const updates = {}
+    updates[`/users/${userName(state)}/goals`] = state.goals.goals
+    if(!(Object.keys(state.goals.goals).length === 0 && state.goals.goals.constructor === Object)) {
+      update(ref(db), updates).then();
+    }
+  }, [state.goals.goals])
 
   const handleGoalsChange = (event) => {
     event.preventDefault();
     dispatch({type: "CHANGE_GOALS", payload:goals})
-    //props.changeCalorieGoals(goals);
   }
 
   async function handleLogout() {
@@ -99,10 +153,6 @@ export default function Dashboard(props) {
           </div>
           <div className={cn(styles.dashboardInfoContainer)}>
             <h2>Моя история изменения веса</h2>
-            <div>
-              <p><span>Изначальный вес: </span><span>{`${props.weightHistory[0].value}`}кг</span></p>
-              <p><span>Текущий вес: </span><span>{`${props.weightHistory[props.weightHistory.length-1].value}`}кг</span></p>
-            </div>
             <Graphic weightHistory = {weightState.weight.weightHistory}/>
           </div>
           <div className={cn(styles.dashboardInfoContainer)}>

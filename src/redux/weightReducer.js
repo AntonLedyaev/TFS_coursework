@@ -16,6 +16,9 @@ export const weightReducer = (state= defaultState, action) => {
       return ({...state, weight: {...state.weight, wantedWeight: action.payload}})
     case "CHANGE_INITIAL_WEIGHT":
       return ({...state, weight: {...state.weight, initialWeight: action.payload}})
+    case "GET_WEIGHT": {
+      return ({...state, weight: action.payload})
+    }
     default:
       return state
   }

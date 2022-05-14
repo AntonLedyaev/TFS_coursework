@@ -3,6 +3,8 @@ import Input from "../decorators/Input";
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from "@mui/material";
 import {useNavigate, useParams} from "react-router-dom";
+import {userName} from "../utils/userName";
+import {getDatabase, ref, update} from "firebase/database";
 
 const FoodItem = (props) => {
   let navigate = useNavigate();
@@ -20,6 +22,7 @@ const FoodItem = (props) => {
     DateID: props.date,
     Type: props.type
   });
+
 
 
   let referenceNutr = {

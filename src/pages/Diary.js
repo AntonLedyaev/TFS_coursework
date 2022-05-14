@@ -2,19 +2,45 @@ import React, {useEffect} from 'react';
 import Header from "../components/Header";
 import styles from "../styles/Diary.module.css"
 import MealGroup from "../components/MealGroup";
-import Calendar from "react-calendar";
 import {useState} from "react";
 import DatePicker from "react-datepicker";
 import {useNavigate, useParams} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {child, get, getDatabase, ref, update} from "firebase/database";
+import {userName} from "../utils/userName";
+import {formatDate} from "../utils/formatDate";
 const Diary = () => {
   const params = useParams();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(params.date? formatDate(params.date):new Date());
   const [rawDate, setRawDate] = useState(params.date);
-
-  useEffect(()=> {
+  const state = useSelector(state => state)
+  const db = getDatabase();
+  useEffect(() => {
+    const updates = {}
+    updates[`/users/${userName(state)}/foodInfo`] = state.foodInfo.foodInfo
+    update(ref(db), updates).then();
     navigate(`/diary/${rawDate}`)
-  }, [rawDate])
+  }, [state.foodInfo, rawDate])
+
+  useEffect(() => {
+    function getData() {
+      get(child(ref(db), `/users/${userName(state)}/foodInfo`)).then((snapshot) => {
+        if (snapshot.exists()) {
+          const data = snapshot.val()
+          if(!data.foodInfo) {
+            data.foodInfo = []
+          }
+          dispatch({type: "GET_FOOD", payload: data})
+        }
+      })
+    }
+    getData()
+  },[dispatch])
+
+
+
 
   return (
     <div>

@@ -9,7 +9,7 @@ import {
   updateEmail,
   updatePassword,
 } from "firebase/auth";
-import {ref, set} from "firebase/database";
+import {useDispatch, useSelector} from "react-redux";
 
 const AuthContext = React.createContext()
 
@@ -21,16 +21,7 @@ export function AuthProvider({ children, ...props }) {
   const [currentUser, setCurrentUser] = useState()
   const [loading, setLoading] = useState(true)
 
-
-  const writeUserData = () => {
-    const userName = currentUser.email.split('@')[0];
-    set(ref(database,'users/' + userName), {
-      user: currentUser.email,
-      weightHistory: props.weightHistory,
-      wantedWeight: props.wantedWeight,
-      goals: props.goals
-    });
-  }
+  const dispatch = useDispatch();
 
   function signup(email, password) {
     return createUserWithEmailAndPassword(auth, email, password)
@@ -60,6 +51,9 @@ export function AuthProvider({ children, ...props }) {
     return onAuthStateChanged(auth, (user) => {
       setCurrentUser(user)
       setLoading(false)
+      if (user) {
+        dispatch({type:"SET_USER", payload: user})
+      }
     })
   }, [])
 
@@ -73,13 +67,9 @@ export function AuthProvider({ children, ...props }) {
     updatePassword_
   }
 
-  if(!loading) {
-    writeUserData();
-  }
-
-
   return (
     <AuthContext.Provider value={value}>
+
       {!loading && children}
     </AuthContext.Provider>
   )

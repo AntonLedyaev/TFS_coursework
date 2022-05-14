@@ -27,6 +27,7 @@ const MealGroup = (props) => {
             proteins = {item.Proteins}
             fats = {item.Fats}
             carbs = {item.Carbs}
+            key = {item.Energy + item.Proteins}
         />)}
         <AddFood type = {props.type} date = {props.date}/>
       </div>

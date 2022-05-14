@@ -1,16 +1,13 @@
 const defaultState = {
-  goals: {
-    calories: 2500,
-    fats: 80,
-    carbs: 250,
-    proteins: 120
-  }
+  goals: {}
 }
 
 export const goalsReducer = (state= defaultState, action) => {
   switch (action.type) {
     case "CHANGE_GOALS":
-      return ({goals: action.payload})
+      return ({...state, goals: action.payload})
+    case "GET_GOALS":
+      return ({...state, goals: action.payload})
     default:
       return state
   }

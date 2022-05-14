@@ -19,7 +19,7 @@ export default function Login() {
       setLoading(true)
       await login(emailRef.current.value, passwordRef.current.value)
       setLoading(false)
-      navigate('/diary');
+      navigate('/');
       // await new Promise(resolve => setTimeout(resolve, 3000))
 
     } catch (e) {
