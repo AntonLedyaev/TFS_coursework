@@ -5,3 +5,18 @@
     justify-content: space-between;
     align-items: center;
 }
+
+.PostItemLink {
+    text-decoration: none;
+    color: #00b4ee;
+    font-size: 20px;
+}
+
+.PostItemLink:hover {
+    cursor: pointer;
+}
+
+.PostItemDescription {
+    font-size: 18px;
+    margin-top: 5px;
+}

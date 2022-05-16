@@ -1,0 +1,5 @@
+.IngredientsItemContainer {
+    width: 580px;
+    display: flex;
+    justify-content: space-between;
+}

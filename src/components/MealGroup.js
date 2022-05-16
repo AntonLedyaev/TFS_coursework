@@ -8,17 +8,30 @@ const MealGroup = (props) => {
   const todayItems = foodList.foodInfo.filter(item => {
     const diaryDate = props.date;
     return (item.DateID === diaryDate && item.Type===props.type)})
+
+  const renderTitle = (type) => {
+    switch (type) {
+      case "breakfast":
+        return "Завтрак"
+      case "lunch":
+        return  "Обед"
+      case "dinner":
+        return "Ужин"
+      default:
+        return "Прием пищи"
+    }
+  }
   return (
     <div>
       <div className={styles.MealGroup}>
         <div className={styles.MealGroupHeader}>
-          <span className={styles.MealGroupHeaderTitle}>{props.type}</span>
-          <span className={styles.MealGroupHeaderMacros}>
+          <div className={styles.MealGroupHeaderTitle}>{renderTitle(props.type)}</div>
+          <div className={styles.MealGroupHeaderMacros}>
               <span className={styles.MealGroupHeaderMacro}>Белки</span>
               <span className={styles.MealGroupHeaderMacro}>Жиры</span>
               <span className={styles.MealGroupHeaderMacro}>Углеводы</span>
-          </span>
-          <span>Калории</span>
+          </div>
+          <div>Калории</div>
         </div>
         {todayItems.map(item =>
           <MealItem

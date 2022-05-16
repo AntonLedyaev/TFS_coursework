@@ -7,11 +7,10 @@ export default function UpdateProfile() {
   const emailRef = useRef()
   const passwordRef = useRef()
   const passwordConfirmRef = useRef()
-  const { currentUser, updatePassword, updateEmail } = useAuth()
+  const { currentUser, updatePassword_, updateEmail } = useAuth()
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const history = useNavigate()
-
   function handleSubmit(e) {
 
     e.preventDefault()
@@ -25,7 +24,7 @@ export default function UpdateProfile() {
     try {
       if ((passwordRef.current.value.length > 5)
         && (passwordRef.current.value.length===passwordConfirmRef.current.value.length) ){
-        updatePassword(passwordRef.current.value)
+        updatePassword_(passwordRef.current.value)
         history("/")
       }
     } catch ( e ){

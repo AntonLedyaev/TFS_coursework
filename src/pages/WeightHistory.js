@@ -21,6 +21,24 @@ const WeightHistory = (props) => {
 
   const state = useSelector(state => state)
   const db = getDatabase();
+
+  useEffect(() => {
+    const updates = {}
+    updates[`/users/${userName(state)}/weight/weightHistory`] = state.weight.weight.weightHistory
+    if(state.weight.weight.weightHistory.length !== 0) {
+      update(ref(db), updates).then();
+    }
+    updates[`/users/${userName(state)}/weight/initialWeight`] = state.weight.weight.initialWeight
+    if(state.weight.weight.initialWeight !== 0) {
+      update(ref(db), updates).then();
+    }
+    updates[`/users/${userName(state)}/weight/wantedWeight`] = state.weight.weight.wantedWeight
+    if(state.weight.weight.wantedWeight !== 0) {
+      update(ref(db), updates).then();
+    }
+
+
+  }, [state.weight, state.user.user])
   useEffect(() => {
     function getData() {
       get(child(ref(db), `/users/${userName(state)}/weight`)).then((snapshot) => {
@@ -33,14 +51,13 @@ const WeightHistory = (props) => {
         }
       })
     }
-    getData()
-  },[dispatch])
+    if (state.user.user !== ''){
+      getData()
+    }
 
-  useEffect(() => {
-    const updates = {}
-    updates[`/users/${userName(state)}/weight`] = state.weight.weight
-    update(ref(db), updates).then();
-  }, [state.weight])
+  },[dispatch, state.user.user])
+
+
 
   const handleCurrentWeightChange = (event) => {
     event.preventDefault();

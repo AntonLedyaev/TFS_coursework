@@ -8,6 +8,7 @@ import {useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {getDatabase, ref, update} from "firebase/database";
 import {userName} from "../utils/userName";
+import styles from "../styles/AddFoodView.module.css"
 const AddFoodView = (props) => {
 
   const [error, setError] = useState(null);
@@ -35,6 +36,7 @@ const AddFoodView = (props) => {
           })
   }
 
+
   const renderList = () => {
     return(
       items.foods.map(item => (
@@ -61,14 +63,18 @@ const AddFoodView = (props) => {
       <Header>
       </Header>
       <div className="container">
-        <h2>Найти еду:</h2><Input type="text" onChange={(e)=> setSearch(e.target.value)}/>
+        <h2>Найти еду:</h2><input
+        className={styles.SearchInput}
+        type="text"
+        onChange={(e)=> setSearch(e.target.value)}
+        placeholder={"Введите название продукта"}
+      />
         <Button onClick = {handleSearch}>Найти</Button>
         <div>
-
           <h3>Результаты поиска:</h3>
-          <ul>
+          <div>
             {items.foods.length > 0 ?  renderList() : <span>Ничего не нашли(</span>}
-          </ul>
+          </div>
         </div>
       </div>
     </>
@@ -78,7 +84,12 @@ const AddFoodView = (props) => {
           <Header>
           </Header>
           <div className="container">
-            <h2>Найти еду:</h2><Input type="text" onChange={(e)=> setSearch(e.target.value)}/>
+            <h2>Найти еду:</h2><input
+            className={styles.SearchInput}
+            type="text"
+            onChange={(e)=> setSearch(e.target.value)}
+            placeholder={"Введите название продукта"}
+          />
             <Button onClick = {handleSearch}>Найти</Button>
           </div>
       </>
@@ -88,18 +99,6 @@ const AddFoodView = (props) => {
     }
 };
 
-
-
-
-
-/*
-
-
-
-<li key = {item.fdcId}>
-                {item.description}
-              </li>
- */
 
 
 

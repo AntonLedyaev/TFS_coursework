@@ -1,0 +1,25 @@
+.FoodItemContainer {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.FoodItemTitle {
+    width: 200px;
+    margin-right: 20px;
+    font-weight: 500;
+    padding: 5px;
+}
+
+.FoodItemSelect {
+    width: 150px;
+}
+
+.FoodItemInput {
+    width: 142px;
+    margin-bottom: 10px;
+}
+
+.FoodItemMacros {
+    width: 450px;
+}

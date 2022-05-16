@@ -2,3 +2,15 @@
     display: flex;
     justify-content: space-between;
 }
+
+.DiaryCalendar {
+    padding: 5px;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 10px;
+    font-size: 14px;
+    width: 150px;
+}
+
+.DiaryCalendar:hover {
+    cursor: pointer;
+}

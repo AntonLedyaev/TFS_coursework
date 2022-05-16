@@ -13,3 +13,13 @@
     justify-content: space-between;
     width: 250px;
 }
+
+.MealItemTitle {
+    display: flex;
+    justify-content: space-between;
+    width: 550px;
+}
+
+.MealItemName {
+    width: 200px;
+}

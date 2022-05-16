@@ -5,8 +5,10 @@ import {Link} from "@mui/material";
 import {useNavigate, useParams} from "react-router-dom";
 import {userName} from "../utils/userName";
 import {getDatabase, ref, update} from "firebase/database";
+import Button from "../decorators/Button";
+import styles from "../styles/FoodItem.module.css"
+const FoodItem = (props, ingredients) => {
 
-const FoodItem = (props) => {
   let navigate = useNavigate();
   const dispatch = useDispatch()
   const foodListState = useSelector(state => state.foodInfo);
@@ -97,7 +99,8 @@ const FoodItem = (props) => {
       Energy: referenceNutr.Energy * localAmount * mes.gramWeight / 100,
       Proteins: referenceNutr.Proteins * localAmount * mes.gramWeight / 100,
       Carbs: referenceNutr.Carbs * localAmount * mes.gramWeight / 100,
-      Fats: referenceNutr.Fats * localAmount * mes.gramWeight / 100
+      Fats: referenceNutr.Fats * localAmount * mes.gramWeight / 100,
+      Weight: localAmount * mes.gramWeight
     })
   }
 
@@ -107,30 +110,47 @@ const FoodItem = (props) => {
     dispatch({type: "ADD_FOOD", payload: nutr})
     navigate(`/diary/${props.date}`);
   }
+
   return (
-    <div>
-      <span>
-        {props.description}
-      </span>
-      <span> Энергетическая ценность: {nutr.Energy} ккал</span>
-      <span> Белки: {nutr.Proteins}г</span>
-      <span> Жиры: {nutr.Fats}г</span>
-      <span> Углеводы: {nutr.Carbs}г</span>
+    <div className={styles.FoodItemContainer}>
+      <div className={styles.FoodItemTitle}>
+        <span>
+          {props.description}
+        </span>
+      </div>
+      <div className={styles.FoodItemMacros}>
+        <div>
+          <span> Калорийность: {nutr.Energy ? nutr.Energy.toFixed(0) : 0} ккал</span>
+        </div>
+        <div>
+          <span> Белки: {nutr.Proteins ? nutr.Proteins.toFixed(1) : 0}г</span>
+          <span> Жиры: {nutr.Fats ? nutr.Fats.toFixed(1) : 0}г</span>
+          <span> Углеводы: {nutr.Carbs ? nutr.Carbs.toFixed(1) : 0}г</span>
+        </div>
 
-      <Input type="text" onChange={handleInput}/>
+      </div>
 
-      <select
-        value = {measure.disseminationText}
-        defaultValue={"default"}
-        onChange={e=> {setMeasure(e.target.value); console.log(measure)}}>
-        <option value={"default"} disabled>
-          Choose an option
-        </option>
-        { measures.map(measure => <option key = {measure.id}>
+      <div>
+        <input
+          placeholder={"100 g"}
+          className={styles.FoodItemInput}
+          type="text"
+          onChange={handleInput}
+        />
+        <select
+          className={styles.FoodItemSelect}
+          value = {measure.disseminationText}
+          defaultValue={"default"}
+          onChange={e=> {setMeasure(e.target.value); console.log(measure)}}>
+          <option value={"default"} disabled>
+            Choose an option
+          </option>
+          { measures.map(measure => <option key = {measure.id}>
             {measure.disseminationText}</option>
-        )}
-      </select>
-      <button onClick={handleAddButtonClick}>добавить</button>
+          )}
+        </select>
+      </div>
+      <Button onClick={props.setIngredients ? () => props.setIngredients([...props.ingredients,nutr]) : handleAddButtonClick}>добавить</Button>
 
     </div>
   );

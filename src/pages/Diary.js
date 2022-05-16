@@ -9,6 +9,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {child, get, getDatabase, ref, update} from "firebase/database";
 import {userName} from "../utils/userName";
 import {formatDate} from "../utils/formatDate";
+import GoalsCounter from "../components/GoalsCounter";
 const Diary = () => {
   const params = useParams();
   const dispatch = useDispatch();
@@ -20,7 +21,9 @@ const Diary = () => {
   useEffect(() => {
     const updates = {}
     updates[`/users/${userName(state)}/foodInfo`] = state.foodInfo.foodInfo
-    update(ref(db), updates).then();
+    if(state.foodInfo.foodInfo.length !== 0) {
+      update(ref(db), updates).then();
+    }
     navigate(`/diary/${rawDate}`)
   }, [state.foodInfo, rawDate])
 
@@ -36,8 +39,10 @@ const Diary = () => {
         }
       })
     }
-    getData()
-  },[dispatch])
+    if(state.user.user !== '') {
+      getData()
+    }
+  },[dispatch, state.user.user])
 
 
 
@@ -49,17 +54,18 @@ const Diary = () => {
       <div className={"container"}>
         <div className={styles.DiaryHeader}>
           <DatePicker
+            className = {styles.DiaryCalendar}
             selected={startDate}
             onChange={(date) => {
             setStartDate(date);
             setRawDate(new Date(date).toLocaleDateString("ru-RU"))
             }}
           />
-          <span>2000</span>
         </div>
         <MealGroup type ="breakfast" date = {rawDate}/>
         <MealGroup type ="lunch" date = {rawDate}/>
         <MealGroup type ="dinner" date = {rawDate}/>
+        <GoalsCounter date = {rawDate}/>
       </div>
     </div>
   );

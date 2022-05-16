@@ -12,6 +12,8 @@ import Diary from "./pages/Diary";
 import WeightHistory from "./pages/WeightHistory";
 import Recipes from "./pages/Recipes";
 import AddFoodView from "./pages/AddFoodView";
+import AddRecipe from "./pages/AddRecipe";
+import Recipe from "./pages/Recipe";
 
 function AppLogin() {
   return (
@@ -43,6 +45,12 @@ function AppLogin() {
               />
               <Route path="/update-profile"
                      element={<PrivateRoute><UpdateProfile/></PrivateRoute>}
+              />
+              <Route path="/add-recipe"
+                     element={<PrivateRoute><AddRecipe/></PrivateRoute>}
+              />
+              <Route path="/recipe/:id"
+                     element={<PrivateRoute><Recipe/></PrivateRoute>}
               />
               <Route path="/signup" element={<Signup/>} />
               <Route path="/login" element={<Login/>} />

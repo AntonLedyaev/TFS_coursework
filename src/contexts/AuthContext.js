@@ -10,6 +10,7 @@ import {
   updatePassword,
 } from "firebase/auth";
 import {useDispatch, useSelector} from "react-redux";
+import {Redirect, useNavigate} from "react-router-dom";
 
 const AuthContext = React.createContext()
 
@@ -66,10 +67,8 @@ export function AuthProvider({ children, ...props }) {
     updateEmail_,
     updatePassword_
   }
-
   return (
     <AuthContext.Provider value={value}>
-
       {!loading && children}
     </AuthContext.Provider>
   )

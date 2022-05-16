@@ -33,13 +33,6 @@ export default function Dashboard(props) {
       get(child(ref(db), `/users/${userName(state)}/goals`)).then((snapshot) => {
         if (snapshot.exists()) {
           const data = snapshot.val()
-
-
-          console.log(data)
-          /*
-          if(!data) {
-            data.goals = {}
-          }*/
           dispatch({type: "GET_GOALS", payload: data})
         }
       })
