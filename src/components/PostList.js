@@ -18,7 +18,7 @@ const PostList = (props) => {
         <h2 style = {{textAlign: 'center'}}>Пользовательские блюда</h2>
         <Button onClick = {handleButtonClick}>Добавить блюдо</Button>
       </div>
-      {props.posts.map((post, index) =>
+      {props.posts.reverse().map((post, index) =>
           <PostItem post = {post} number={index + 1}  key = {post.id}/>
       )}
     </div>
