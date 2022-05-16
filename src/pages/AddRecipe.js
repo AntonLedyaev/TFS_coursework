@@ -12,6 +12,7 @@ import {getDatabase, ref, update, push} from "firebase/database";
 import {useNavigate} from "react-router-dom";
 import styles from "../styles/AddRecipe.module.css"
 import classNames  from "classnames";
+import we from "react-datepicker";
 const AddRecipe = () => {
   const state = useSelector(state => state)
   const [error, setError] = useState(null);
@@ -22,6 +23,7 @@ const AddRecipe = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [guide, setGuide] = useState('');
+  const [weight, setWeight] = useState(0)
   const [nutrients, setNutrients] = useState({
     Energy: 0,
     Proteins: 0,
@@ -51,11 +53,13 @@ const AddRecipe = () => {
   useEffect(() => {
     if(ingredients.length > 0) {
       ingredients.forEach(item => {
+        const localWeight = item.Weight ? weight + item.Weight : weight + 100
+        setWeight(item.Weight ? weight + item.Weight : weight + 100)
         setNutrients({
-          Energy: nutrients.Energy + item.Energy,
-          Proteins: nutrients.Proteins + item.Proteins,
-          Fats: nutrients.Fats + item.Fats,
-          Carbs: nutrients.Carbs + item.Carbs
+          Energy: (nutrients.Energy + item.Energy) / localWeight * 100,
+          Proteins: (nutrients.Proteins + item.Proteins) /localWeight * 100,
+          Fats: (nutrients.Fats + item.Fats) /localWeight * 100,
+          Carbs:(nutrients.Carbs + item.Carbs) /localWeight * 100,
         })
       })
     }
@@ -121,15 +125,18 @@ const AddRecipe = () => {
         <div>
           <h3>Список ингридиентов</h3>
           <div>
-            {ingredients.map((item, index) => <IngredientsItem
-            Description = {item.Description}
-            Weight = {item.Weight}
-            key = {index}
-            />)}
+            {ingredients.map((item, index) =>
+              <IngredientsItem
+                Description = {item.Description}
+                Weight = {item.Weight}
+                key = {index}
+              />
+            )}
           </div>
         </div>
-        <h3>Энергетическая ценность:</h3>
+        <h3>Энергетическая ценность в 100г:</h3>
         <div className={styles.AddRecipeNutrientsContainer}>
+          <span>{`Вес: ${weight}г`}</span>
           <span>{`Калории: ${nutrients.Energy ? nutrients.Energy.toFixed(0) : "0"}`}</span>
           <span>{`Белки: ${nutrients.Proteins ? nutrients.Proteins.toFixed(1) : "0"}`}</span>
           <span>{`Жиры: ${nutrients.Fats ? nutrients.Fats.toFixed(1) : "0"}`}</span>
