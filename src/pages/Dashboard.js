@@ -104,7 +104,7 @@ export default function Dashboard(props) {
                 <Input
                   onChange = {(e)=> setGoals({...goals, calories: e.target.value})}
                   className={styles.dashboardInfoGoalsInput}
-                  type="text"
+                  type="number"
                   name="calories"
                   placeholder={goals.calories}
                 />
@@ -114,7 +114,7 @@ export default function Dashboard(props) {
                 <Input
                   onChange = {(e)=> setGoals({...goals, fats: e.target.value})}
                   className={styles.dashboardInfoGoalsInput}
-                  type="text"
+                  type="number"
                   name="fats"
                   placeholder={`${goals.fats}г`}
                 />
@@ -124,7 +124,7 @@ export default function Dashboard(props) {
                 <Input
                   onChange = {(e)=> setGoals({...goals, proteins: e.target.value})}
                   className={styles.dashboardInfoGoalsInput}
-                  type="text"
+                  type="number"
                   name="proteins"
                   placeholder={`${goals.proteins}г`}
                 />
@@ -134,7 +134,7 @@ export default function Dashboard(props) {
                 <Input
                   onChange = {(e)=> setGoals({...goals, carbs: e.target.value})}
                   className={styles.dashboardInfoGoalsInput}
-                  type="text" name="carbs"
+                  type="number" name="carbs"
                   placeholder={`${goals.carbs}г`}
                 />
               </div>

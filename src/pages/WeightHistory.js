@@ -90,7 +90,7 @@ const WeightHistory = (props) => {
           <h2>Взвеситься </h2>
           <Input
             className={styles.WeightHistoryInput}
-            type="text"
+            type="number"
             placeholder={"Введите ваш вес"}
             onChange={e=> setCurrentWeight({id: Date.now(), value: e.target.value})}/>
           <Button onClick = {handleCurrentWeightChange}>

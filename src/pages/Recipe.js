@@ -53,7 +53,7 @@ const Recipe = () => {
           </div>
           <div>
             <p>Введите вес:</p>
-            <input className={styles.RecipeInput} placeholder={"Вес в граммах"} onChange={event => setAmount(Number(event.target.value))}/>
+            <input type = {"number"} className={styles.RecipeInput} placeholder={"Вес в граммах"} onChange={event => setAmount(Number(event.target.value))}/>
             <p>Выберите прием пищи:</p>
             <select className={styles.RecipeSelect} onChange={(e) => setType(e.target.value)}>
               <option value="" disabled>Выберите прием пищи</option>
