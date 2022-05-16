@@ -1,30 +1,29 @@
 import React, {useState} from 'react';
-import PostList from "../components/PostList";
 import Header from "../components/Header";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate, useParams} from "react-router-dom";
-import Input from "../decorators/Input";
 import Button from "../decorators/Button";
 import styles from "../styles/Recipe.module.css"
 import calendarStyles from "../styles/Diary.module.css"
 import DatePicker from "react-datepicker";
-import {formatDate} from "../utils/formatDate";
+
 const Recipe = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [type, setType] = useState('breakfast');
   const [date, setDate] = useState(new Date())
   const [rawDate, setRawDate] = useState(new Date(Date.now()).toLocaleDateString("ru-RU"));
+  const [amount, setAmount] = useState(100)
   const id = useParams().id ;
   const recipes = useSelector(state => state.recipes)
   const recipe = recipes.find(item => item.id === Number(id));
   console.log(rawDate)
   const foodItem = {
     Description: recipe.title,
-    Energy: recipe.Nutrients.Energy,
-    Proteins: recipe.Nutrients.Proteins,
-    Carbs: recipe.Nutrients.Carbs,
-    Fats: recipe.Nutrients.Fats,
+    Energy: recipe.Nutrients.Energy * amount / 100,
+    Proteins: recipe.Nutrients.Proteins * amount / 100,
+    Carbs: recipe.Nutrients.Carbs * amount / 100,
+    Fats: recipe.Nutrients.Fats * amount / 100,
     DateID: rawDate,
     Type: type
   }
@@ -53,6 +52,8 @@ const Recipe = () => {
             </div>
           </div>
           <div>
+            <p>Введите вес:</p>
+            <input className={styles.RecipeInput} placeholder={"Вес в граммах"} onChange={event => setAmount(Number(event.target.value))}/>
             <p>Выберите прием пищи:</p>
             <select className={styles.RecipeSelect} onChange={(e) => setType(e.target.value)}>
               <option value="" disabled>Выберите прием пищи</option>
