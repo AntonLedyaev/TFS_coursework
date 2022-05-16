@@ -93,8 +93,7 @@ export default function Dashboard(props) {
   }
   return (
     <>
-      <Header>
-      </Header>
+      <Header/>
       <div className={"container"}>
         <div className={styles.dashboardInfo}>
           <div className={cn(styles.dashboardInfoContainer)}>

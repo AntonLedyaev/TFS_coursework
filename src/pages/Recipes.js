@@ -1,11 +1,8 @@
 import React from 'react';
 import Header from "../components/Header";
 import PostList from "../components/PostList";
-import PostItem from "../components/PostItem";
 import {useState,useEffect} from "react";
-import Button from "../decorators/Button";
 import {child, get, getDatabase, ref} from "firebase/database";
-import {userName} from "../utils/userName";
 import {useDispatch} from "react-redux";
 const Recipes = () => {
   const dispatch = useDispatch();
@@ -27,9 +24,8 @@ const Recipes = () => {
   return (
     <div>
       <Header/>
-
       <div className="container">
-      <PostList posts = {recipeList}/>
+        <PostList posts = {recipeList}/>
       </div>
     </div>
   );

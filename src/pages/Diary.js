@@ -49,8 +49,7 @@ const Diary = () => {
 
   return (
     <div>
-      <Header>
-      </Header>
+      <Header/>
       <div className={"container"}>
         <div className={styles.DiaryHeader}>
           <DatePicker

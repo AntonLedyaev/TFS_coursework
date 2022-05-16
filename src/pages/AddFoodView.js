@@ -80,9 +80,9 @@ const AddFoodView = (props) => {
     </>
   )} else {
     return (
-      <>
-          <Header>
-          </Header>
+      <div>
+          <Header/>
+
           <div className="container">
             <h2>Найти еду:</h2><input
             className={styles.SearchInput}
@@ -92,7 +92,7 @@ const AddFoodView = (props) => {
           />
             <Button onClick = {handleSearch}>Найти</Button>
           </div>
-      </>
+      </div>
 
       )
 

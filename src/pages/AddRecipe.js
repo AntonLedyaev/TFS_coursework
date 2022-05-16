@@ -103,8 +103,7 @@ const AddRecipe = () => {
     )
   } else if (isLoaded && items.foods) {return (
     <>
-      <Header>
-      </Header>
+      <Header/>
       <div className="container">
         <div className={styles.AddRecipeTitleContainer}>
           <h2>Составьте рецепт</h2>

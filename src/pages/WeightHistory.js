@@ -84,10 +84,8 @@ const WeightHistory = (props) => {
 
   return (
     <div>
-      <Header>
-      </Header>
+      <Header/>
       <div className={"container"}>
-
         <div className={styles.WeightHistoryContainer}>
           <h2>Взвеситься </h2>
           <Input
