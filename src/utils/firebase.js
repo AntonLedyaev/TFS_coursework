@@ -5,7 +5,7 @@ import 'firebase/database';
 import { getDatabase } from "firebase/database";
 
 const app = firebase.initializeApp({
-  apiKey: "AIzaSyCJD1TagipftukAJBdo7K5GMuuKN8Eyw7Q",
+  apiKey: apiKey"",
   authDomain: "myfoodtracker-c19f9.firebaseapp.com",
   projectId: "myfoodtracker-c19f9",
   storageBucket: "myfoodtracker-c19f9.appspot.com",
