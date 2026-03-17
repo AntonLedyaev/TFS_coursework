@@ -1,19 +1,19 @@
 
 # MyFoodTracker
-## Курсовой проект на курсе Tinkoff Fintech School, Frontend, весна 2022
-Выполнил Ледяев Антон Алексеевич 
+## Course project at Tinkoff Fintech School, Frontend, Spring 2022
+Completed by Anton Ledyaev 
 
 
-## Описание проекта
-MyFoodTracker - приложение для подсчета потребляемых калорий и отслеживания диеты. 
-Целевая аудитория приложения - люди, которым нужно следить за своей диетой: худеющие, спортсмены, люди, ведущие активный образ жизни.
-### Основные функции приложения:
-* Личный кабинет
-* Подсчет калорий и макроэлементов, поиск продуктов по базе данных
-* Добавление прошедших приемов пищи
-* Календарь с историей питания
-* Отслеживание веса с визуализацией истории изменения
-### Дополнительные функции:
-* Рекомендации по количеству потрябляемых калорий и макроэлементов, необходимых для достижения заданного результата
-* Возможность добавлять свои рецепты 
-* Комментирование чужих рецептов 
+## Project Description
+MyFoodTracker is an application for counting consumed calories and tracking diet.
+The target audience of the application is people who need to monitor their diet: those losing weight, athletes, and people with an active lifestyle.
+### Main Features of the Application:
+* Personal account
+* Calorie and macronutrient counting, product search in the database
+* Adding past meals
+* Calendar with nutrition history
+* Weight tracking with visualization of changes over time
+### Additional Features:
+* Recommendations for calorie and macronutrient intake required to achieve a specified goal
+* Ability to add your own recipes 
+* Commenting on other users’ recipes 
